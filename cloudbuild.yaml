@@ -1,0 +1,10 @@
+steps:
+  # Use modern BuildKit engine
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t' 'us-central1-docker.pkg.dev/$PROJECT_ID/time-service-repo/time-service:$COMMIT_SHA', '.']
+  env:
+    - 'DOCKER_BUILDKIT=1'
+
+# Automatically push to the Artifact Registry upon a successful build
+images: 
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/time-service-repo/time-service:$COMMIT_SHA'
